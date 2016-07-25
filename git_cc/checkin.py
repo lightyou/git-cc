@@ -119,6 +119,7 @@ class ITransaction(object):
         cc.rmactivity()
     def commit(self, comment):
         for file in self.checkedout:
+            comment = comment.encode("ascii", 'replace')
             cc_exec(['ci', '-identical', '-c', comment, file])
 
 class Transaction(ITransaction):
